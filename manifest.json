@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "PPO AWS Role Switcher",
+  "name": "AWS Role Switcher",
   "version": "1.0",
   "description": "Quickly switch AWS IAM roles using local configuration profiles.",
   
@@ -13,7 +13,7 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icons/icon16.png",
-    "default_title": "PPO AWS Roles"
+    "default_title": "AWS Roles Switch"
   },
 
   "options_page": "options.html",
