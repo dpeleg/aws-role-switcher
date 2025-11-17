@@ -69,7 +69,7 @@ The extension is will not work until you load your organization's configuration 
 ```
 
 ## Usage
-Ensure you are logged into the AWS Management Console in a tab.
-Click the PPO AWS Role Switcher icon in your Chrome toolbar.
-Select the desired role from the list.
-The extension handles the form filling and role submission instantly.
+- Ensure you are logged into the AWS Management Console in a tab.
+- Click the PPO AWS Role Switcher icon in your Chrome toolbar.
+- Select the desired role from the list.
+- The extension handles the form filling and role submission instantly.
