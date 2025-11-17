@@ -1,0 +1,74 @@
+
+body {
+    /* Set a reasonable, compact size for a browser popup */
+    width: 300px; 
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+#popup-container {
+    padding: 5px;
+}
+
+h2 {
+    font-size: 1.2em;
+    color: #232f3e; /* AWS dark blue-grey */
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#profile-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#profile-list li {
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.95em;
+    color: #333;
+    transition: background-color 0.2s, color 0.2s;
+    /* Optional: Show role name in bold */
+    font-weight: 500; 
+}
+
+/* Hover state for clickable profiles */
+#profile-list li:hover {
+    background-color: #ff9900; /* AWS Orange */
+    color: white;
+}
+
+/* Styles for informational messages */
+#loading-message, #error-message {
+    font-style: italic;
+    color: #666;
+    padding: 10px 0;
+}
+
+.error {
+    color: #c40000; /* Red for errors */
+    font-weight: bold;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 5px;
+    border-top: 1px solid #eee;
+}
+
+.footer small {
+    color: #aaa;
+    font-size: 0.75em;
+}

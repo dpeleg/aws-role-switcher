@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AWS Role Switcher</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div id="popup-container">
+        <h2>AWS Profiles</h2>
+        <p id="loading-message">Loading profiles...</p>
+        
+        <ul id="profile-list" style="display: none;">
+            </ul>
+
+        <p id="error-message" class="hidden error">
+            Error: Could not load profiles. Check your roles.json file.
+        </p>
+
+        <hr>
+
+        <div class="footer">
+            <small>PPO AWS Extension v1.0</small>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
