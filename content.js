@@ -78,7 +78,7 @@ function selectColorOption(colorName) {
         colorButton.click();
     }
 
-    // Give a very slight delay for the dropdown to render, which is sometimes necessary
+    // Create a short delay for the dropdown to render
     setTimeout(() => {
         // 2. Find the specific color option using the title attribute from your provided HTML snippet
         const targetColorTitle = colorName;
@@ -98,8 +98,7 @@ function selectColorOption(colorName) {
  * Clicks the final "Switch Role" button.
  */
 function clickSwitchRoleButton() {
-    // Attempt to find the button by its text content, which is safer than IDs that frequently change.
-    // The button usually has type="submit".
+    // Attempt to find submit button by its text content
     const buttons = document.querySelectorAll('button[type="submit"]');
     
     let switchButton = null;

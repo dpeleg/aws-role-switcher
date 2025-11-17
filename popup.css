@@ -1,6 +1,6 @@
 
 body {
-    /* Set a reasonable, compact size for a browser popup */
+    /* Set size for browser popup */
     width: 300px; 
     font-family: Arial, sans-serif;
     padding: 10px;
@@ -14,7 +14,7 @@ body {
 
 h2 {
     font-size: 1.2em;
-    color: #232f3e; /* AWS dark blue-grey */
+    color: #232f3e; 
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
     margin-top: 0;
@@ -29,20 +29,38 @@ h2 {
 
 #profile-list li {
     padding: 8px 12px;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     cursor: pointer;
     border-radius: 4px;
     font-size: 0.95em;
     color: #333;
-    transition: background-color 0.2s, color 0.2s;
-    /* Optional: Show role name in bold */
+    transition: background-color 0.2s, color 0.2s, border 0.2s;
     font-weight: 500; 
+    border: 1px solid #ddd; 
+    background-color: #ffffff; /* Ensure background is white for contrast */
 }
 
-/* Hover state for clickable profiles */
 #profile-list li:hover {
-    background-color: #ff9900; /* AWS Orange */
+    background-color: #ff9900;
     color: white;
+    border-color: #ff9900; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.color-blue {
+    border-left: 5px solid #83d4e8 !important; 
+}
+.color-red {
+    border-left: 5px solid #ea7158 !important;
+}
+.color-green {
+    border-left: 5px solid #b4d699 !important;
+}
+.color-yellow {
+    border-left: 5px solid #efda95 !important;
+}
+.color-orange {
+    border-left: 5px solid #fbc8aa !important;
 }
 
 /* Styles for informational messages */
