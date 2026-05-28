@@ -20,13 +20,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             fillTextField('roleName', profile.roleName);
             fillTextField('displayName', profile.displayName);
             
-            // Step 3: Handle the color dropdown
-            if (profile.color && profile.color.toLowerCase() !== 'none') {
-                selectColorOption(profile.color);
+            // Step 3 & 4: Handle the color dropdown, then submit
+            // The color selection is asynchronous, so we must submit the form
+            // inside a callback to ensure it happens after the color is chosen.
+            if (profile.color) {
+                selectColorOption(profile.color, clickSwitchRoleButton);
+            } else {
+                clickSwitchRoleButton();
             }
-            
-            // Step 4: Click the "Switch Role" button
-            clickSwitchRoleButton();
 
         } catch (error) {
             console.error("Error during form filling:", error);
@@ -63,34 +64,54 @@ function fillTextField(id, value) {
 
 /**
  * Handles the AWS color dropdown interaction.
- * @param {string} colorName - The user-friendly color name (e.g., 'Red', 'Blue').
+ * @param {function} callback - Function to execute after the color is selected.
  */
-function selectColorOption(colorName) {
-    // 1. Find and click the color picker button to open the dropdown
+function selectColorOption(colorName, callback) {
+    // 1. Map to valid AWS colors. AWS strictly expects one of these exact values.
+    const validColors = ['None', 'Red', 'Orange', 'Yellow', 'Green', 'Blue'];
+    let targetColor = validColors.find(c => c.toLowerCase() === colorName.toLowerCase());
+    
+    // If an unsupported color (like 'Purple') is passed, gracefully fallback to 'None'
+    if (!targetColor) {
+        console.warn(`Color '${colorName}' is not natively supported by AWS. Falling back to 'None'.`);
+        targetColor = 'None';
+    }
+    // 2. Find and click the color picker button to open the dropdown
     const colorButton = document.getElementById('color');
     if (!colorButton) {
         console.warn("Color picker button not found.");
+        if (callback) {
+            callback();
+        }
         return;
     }
     
     // Check if the dropdown is already open (avoid double-clicking)
-    if (!document.querySelector('.awsui_dropdown-content-wrapper_qwoo0_nxdfa_153')) {
+    if (colorButton.getAttribute('aria-expanded') !== 'true') {
         colorButton.click();
     }
 
-    // Create a short delay for the dropdown to render
+    // Create a slightly longer delay for the React portal dropdown to render
     setTimeout(() => {
-        // 2. Find the specific color option using the title attribute from your provided HTML snippet
-        const targetColorTitle = colorName;
-        const colorOptionListItem = document.querySelector(`li span[title="${targetColorTitle}"]`).closest('li');
+        // 3. Find the specific color option
+        const options = Array.from(document.querySelectorAll('li, [role="option"]'));
+        let colorOptionListItem = options.find(opt => {
+            const hasTitle = opt.querySelector(`span[title="${targetColor}"]`);
+            const hasText = opt.textContent.trim().toLowerCase() === targetColor.toLowerCase();
+            return hasTitle || hasText;
+        });
+
         if (colorOptionListItem) {
-            // 3. Click the list item
-            colorOptionListItem.click();
-            console.log(`Selected color: ${colorName}`);
+            // Click the list item wrapper
+            const clickable = colorOptionListItem.closest('li') || colorOptionListItem;
+            clickable.click();
+            console.log(`Selected color: ${targetColor}`);
         } else {
-            console.warn(`Color option not found for: ${colorName}`);
+            console.warn(`Color option not found for: ${targetColor}`);
         }
-    }, 50); // 50ms delay
+        // 4. Proceed to click the Switch Role submit button
+        if (callback) callback();
+    }, 200); // Increased delay to 200ms to ensure the UI is fully ready
 }
 
 
