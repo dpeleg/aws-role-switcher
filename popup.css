@@ -1,7 +1,12 @@
 
+html {
+    width: 300px;
+}
+
 body {
     /* Set size for browser popup */
-    width: 300px; 
+    width: 300px;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
     padding: 10px;
     margin: 0;
